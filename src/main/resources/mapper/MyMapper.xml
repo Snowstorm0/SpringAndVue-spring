@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.boot.dao.MyMapper">
+
+    <!-- 用户实体-->
+    <resultMap id="UserDTO" type="com.spring.boot.common.UserDTO">
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+    <!-- 返回全部用户类 -->
+    <select id="userView" resultType="com.spring.boot.common.UserDTO">
+        select * from user_data
+    </select>
+
+    <!-- 增 -->
+    <select id="userAdd" resultType="Integer">
+        insert into user_data(number,name) values(#{number},#{name})
+    </select>
+
+    <!-- 删 -->
+    <select id="userDelete" resultType="Integer">
+        delete from user_data where number = #{number}
+    </select>
+
+    <!-- 改 -->
+    <select id="userEdit" resultType="Integer">
+        update user_data set name = #{name} where number = #{number}
+    </select>
+
+    <!-- 查 -->
+    <select id="userQuery" resultType="com.spring.boot.common.UserDTO">
+        select * from user_data limit #{start},#{length}
+    </select>
+
+
+</mapper>
